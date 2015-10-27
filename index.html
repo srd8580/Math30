@@ -1,14 +1,53 @@
 <html>
 <head>
 	<title>Math | 30 Questions</title>
+	
+	<link rel="shortcut icon" href="/favicon.ico?v=2" />
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-k2/8zcNbxVIh5mnQ52A0r3a6jAgMGxFJFE2707UxGCk= sha512-ZV9KawG2Legkwp3nAlxLIVFudTauWuBpC10uEafMHYL0Sarrz5A7G79kXh5+5+woxQ5HM559XX2UZjMJ36Wplg==" crossorigin="anonymous">
 	<link type="text/css" rel="stylesheet" href="/styles.css" />
 	
 	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="/math30.js"></script>
 </head>
 <body>
-	<div id="selectGameContainer">
+	<h1>Math - 30 Questions</h1>
+	<h2>Choose Type(s)</h2>
+	
+	<div id="optionsContainer" class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="no-bullet">
+					<li>			
+						<a id="btnAddition" class="btn btn-lg btn-success type-button">
+							<i class="fa fa-plus"></i>
+							Addition
+						</a>
+					</li>
+					<li>
+						<a id="btnSubtraction" class="btn btn-lg btn-success type-button">
+							<i class="fa fa-minus"></i>
+							Subtraction
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 		
+		<div class="row">
+			<div class="col-md-12">
+				<a id="btnGo" class="btn btn-primary">GO</a>
+			</div>
+		</div>		
+	</div>	
+	
+	<div id="gameContainer" class="container" style="display: none">
+		<div class="row">
+			<div class="col-md-12">
+				GAME ON
+			</div>
+		</div>
 	</div>
 </body>
 </html>
