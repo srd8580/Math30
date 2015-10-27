@@ -1,0 +1,23 @@
+{
+  "name": "math30",
+  "version": "1.0.0",
+  "description": "Math 30 questions\r Quizzes 30 Addition and/or Subtraction questions on a timer.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srd8580/Math30.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srd8580/Math30/issues"
+  },
+  "homepage": "https://github.com/srd8580/Math30#readme"
+}
