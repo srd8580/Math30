@@ -17,6 +17,7 @@ function normalizePort(val) {
 		return false;
 }
 
+app.use(express.static('.'));
 app.set('port', normalizePort(process.env.PORT || '3000'));
 
 app.get('/', function (req, res) {
