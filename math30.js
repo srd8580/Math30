@@ -13,14 +13,13 @@ var Math30ViewModel = function () {
 	self.selectSubtractionButton = null;
 	self.submitOptionsButton = null;
 	self.gameContainer = null;
-	self.currentProblem = null;
+	self.timerContainer = null;
+	self.timerOn = false;
+	self.seconds = 0;
 	self.currentProblemIndex = 0;
+	self.allowedOperators = [];
 	self.problems = [];
-	self.problemCount = 30;
-	//
-	//TODO: build timer functionality and UI
-	//TODO: build in ability to have 
-	//
+	self.problemCount = 30;	
 	
 	self.init = function () {
 		//set UI vars
@@ -30,56 +29,104 @@ var Math30ViewModel = function () {
 		self.selectSubtractionButton = $("#btnSubtraction");
 		self.submitOptionsButton = $("#btnGo");
 		self.gameContainer = $("#gameContainer");
+		self.timerContainer = $("#timerContainer");
 		
 		//wireup events
 		self.typeButtons.click(self.onTypeClick);
-		self.submitOptionsButton.click(self.submitOptions);
+		self.submitOptionsButton.click(self.startGame);
 	};
 	
 	self.onTypeClick = function (evt) {
-		if ($(this).hasClass("btn-success")) {
-			$(this).removeClass("btn-success");
-			$(this).addClass("btn-default");
+		if ($(this).hasClass("active")) {
+			$(this).removeClass("active");
 		} else {
-			$(this).removeClass("btn-default");
-			$(this).addClass("btn-success");
+			$(this).addClass("active");
 		}
 	};
 	
+	self.buildAllowedOperators = function () {
+		self.allowedOperators = [];
+		
+		$("[data-operator]").each(function () {
+			if ($(this).hasClass("active")) {
+				self.allowedOperators.push($(this).data("operator"));
+			}
+		});
+	};
+	
 	self.buildProblems = function () {
+		self.problems = [];
+		
 		for (var i = 0; i < self.problemCount; i++) {
-			self.problems.push(new Problem(i + 1));
+			self.problems.push(new Problem(i + 1, self.allowedOperators));
 		}
 		self.currentProblemIndex = 0;
 	};
 	
 	self.nextQuestion = function () {
+		self.problems[self.currentProblemIndex].answer = Problem.answerInput.val();
+		
 		if (self.currentProblemIndex + 1 < self.problemCount) {
 			self.currentProblemIndex++;
+			self.problems[self.currentProblemIndex].paint();
+		} else {	//done
+			self.completeGame();
 		}
-		self.problems[self.currentProblemIndex].paint();
 	};	
 	
-	self.submitOptions = function () {
-		//
-		//TODO: validation of options\
-		//
-		self.optionsContainer.hide();
+	self.startTimer = function () {
+		self.seconds = 0;
+		self.timerOn = true;
+	};
+	
+	self.completeGame = function () {
+		self.timerOn = false;
 		
+		var correctAnswers = $.grep(self.problems, function (item) {
+			return item.isCorrect();
+		});
+		
+		alert("You got " + 
+			  correctAnswers.length + " of " + 
+			  self.problemCount + " correct in " + self.seconds + " seconds!");
+		
+		self.optionsContainer.show();
+		self.gameContainer.hide();		
+	};
+	
+	self.startGame = function () {
+		self.buildAllowedOperators();
+		
+		if (self.allowedOperators.length < 1) {
+			alert("Please choose at least one type!");
+			return;
+		}
+		
+		self.optionsContainer.hide();
+				
 		self.buildProblems();
 		self.problems[self.currentProblemIndex].paint();
+		self.startTimer();
 		self.gameContainer.show();
 	};
+	
+	setInterval(function () {
+		if (self.timerOn) {
+			self.seconds++;
+			self.timerContainer.text(self.seconds);
+		}
+	}, 1000);
 };
 
-var Problem = function (index) {
+var Problem = function (index, allowedOperators) {
 	var self = this;
 	
 	self.init();
 	self.index = index;
 	self.numerator = Problem.random();
 	self.denominator = Problem.random();
-	self.operator = Problem.randomOperator();
+	self.operator = Problem.randomOperator(allowedOperators);
+	self.correctAnswer = null;
 	self.answer = '';
 	
 	//make sure numerator is >= denominator
@@ -87,9 +134,7 @@ var Problem = function (index) {
 		self.denominator = [self.numerator, self.numerator = self.denominator][0];
 	}
 	
-	//
-	//TODO: calculate correct answer
-	//
+	self.correctAnswer = eval(self.numerator + self.operator + self.denominator);
 	
 	self.paint = function () {
 		Problem.problemNumberContainer.text(self.index + ".");
@@ -99,9 +144,12 @@ var Problem = function (index) {
 		Problem.answerInput.val(self.answer);
 		Problem.answerInput.focus();
 	};
+	
+	self.isCorrect = function () {
+		return self.correctAnswer == self.answer;	
+	};
 };
 
-Problem.operators = ['+', '-'];
 Problem.min = 0;
 Problem.max = 10;
 Problem.isInitialized = false;
@@ -129,9 +177,9 @@ Problem.random = function (min, max) {
 	
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-Problem.randomOperator = function () {
-	var idx = Problem.random(0, Problem.operators.length - 1);	
-	return Problem.operators[idx];
+Problem.randomOperator = function (operators) {
+	var idx = Problem.random(0, operators.length - 1);	
+	return operators[idx];
 };
 
 window.viewModel = new Math30ViewModel();

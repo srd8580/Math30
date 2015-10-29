@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>Math | 30 Questions</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="shortcut icon" href="/favicon.ico?v=2" />
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -18,20 +19,16 @@
 	<div id="optionsContainer" class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<ul class="no-bullet">
-					<li>			
-						<a id="btnAddition" class="btn btn-lg btn-success type-button">
-							<i class="fa fa-plus"></i>
-							Addition
-						</a>
-					</li>
-					<li>
-						<a id="btnSubtraction" class="btn btn-lg btn-success type-button">
-							<i class="fa fa-minus"></i>
-							Subtraction
-						</a>
-					</li>
-				</ul>
+				<div class="list-group">
+					<a id="btnAddition" data-operator="+" class="type-button list-group-item active">
+						<i class="fa fa-plus"></i>
+						Addition
+					</a>
+					<a id="btnSubtraction" data-operator="-" class="type-button list-group-item active">
+						<i class="fa fa-minus"></i>
+						Subtraction
+					</a>
+				</div>
 			</div>
 		</div>
 		
@@ -43,6 +40,12 @@
 	</div>	
 	
 	<div id="gameContainer" class="container" style="display: none">
+		<div class="row">
+			<div class="col-md-12">
+				<span id="timerContainer"></span>
+				Seconds
+			</div>
+		</div>
 		<div class="row">
 			<div id="problemNumberContainer" class="col-md-1"></div>
 			<div id="numeratorContainer" class="col-md-1">
