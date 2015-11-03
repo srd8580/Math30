@@ -13,10 +13,20 @@
 	<script type="text/javascript" src="/math30.js"></script>
 </head>
 <body>
-	<h1>Math - 30 Questions</h1>
-	<h2>Choose Type(s)</h2>
+	<nav class="nav navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Math - 30 Questions</a>
+			</div>
+		</div>
+	</nav>
 	
-	<div id="optionsContainer" class="container">
+	<div id="optionsContainer" class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Choose Type(s)</h3>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="list-group">
@@ -34,7 +44,7 @@
 		
 		<div class="row">
 			<div class="col-md-12">
-				<a id="btnGo" class="btn btn-primary">GO</a>
+				<a id="btnGo" class="btn btn-default">GO</a>
 			</div>
 		</div>		
 	</div>	
@@ -48,9 +58,7 @@
 		</div>
 		<div class="row">
 			<div id="problemNumberContainer" class="col-md-1"></div>
-			<div id="numeratorContainer" class="col-md-1">
-				
-			</div>
+			<div id="numeratorContainer" class="col-md-1"></div>
 		</div>
 		<div class="row">
 			<div id="operatorContainer" class="col-md-1"></div>

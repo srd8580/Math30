@@ -104,10 +104,10 @@ var Math30ViewModel = function () {
 		
 		self.optionsContainer.hide();
 				
-		self.buildProblems();
-		self.problems[self.currentProblemIndex].paint();
+		self.buildProblems();		
 		self.startTimer();
 		self.gameContainer.show();
+		self.problems[self.currentProblemIndex].paint();
 	};
 	
 	setInterval(function () {
