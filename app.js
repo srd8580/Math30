@@ -3,7 +3,7 @@ var path = require('path');
 var app = express();
 
 app.use(express.static('.'));
-app.use('lib', express.static('bower_components'));
+app.use('/libs', express.static(__dirname + "/bower_components"));
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + "/index.html");
